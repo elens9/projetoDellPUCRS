@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <!--<link rel="stylesheet" href="style.css">-->
+        <title>Ballit ChampionShip Game</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="container_conteudo">
+                <div class="container_texto">
+                    <h1>Cadastro de<span class="container_texto_azul"> times</span></h1>
+                    <p>O Ballit ChampionShip precisa de no mínimmo 8 equipes pra poder começar a partida! Adicione os seus times!</p>
+    
+                    <div class="container_campo">
+                        <label class="texto_label">Nome do time: </label>
+                        <input class="container_input" id="nome-time" type="text">
+                    </div>
+    
+                    <div class="container_campo">
+                        <label class="texto_label">Grito de guerra: </label>
+                        <input class="container_input" id="grito-guerra" type="text">
+                    </div>
+    
+                    <div class="container_campo">
+                        <label class="texto_label">Ano de fundação: </label>
+                        <input class="container_input" id="ano-fundacao" type="number" min="1">
+                    </div>
+                </div>
+    
+                <div class="cadastro container_botao">
+                    <button onclick="cadastrar()" id="btn-cadastrar" class="container_botao">Cadastrar time</button>
+                </div>
+    
+    
+                <div class="container_texto" id="lista-times">
+                    <label class="texto_label">Times cadastrados: nenhum até agora.</label>
+                </div>
+
+                <div class="jogar container_botao">
+                    <button onclick="iniciarPartida()" id="btn-jogar" class="container_botao">Começar partida</button>
+
+                </div>
+    
+               <!--<img src="teste-imagem.jpg" alt="parede de tijolos com um alien gamer" class="container_imagem-alien">
+--> 
+            </div>
+        </div>
+
+        <script src="app.js" defer></script>
+
+    </body>
+</html>
