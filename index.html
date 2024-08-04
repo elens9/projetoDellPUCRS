@@ -39,9 +39,26 @@
                 </div>
 
                 <div class="jogar container_botao">
-                    <button onclick="iniciarPartida()" id="btn-jogar" class="container_botao">Começar partida</button>
+                    <button onclick="iniciarCampeonato()" id="btn-campeonato" class="container_botao">Começar Campeonato</button>
+                </div>
+
+                <p class="sorteio_titulo"><h1>Resultado do sorteio de times:</h1></p>
+                <div class="sorteio_container">
+                    <p id="lista-sorteio"></p> 
+                </div>
+
+                <p class="partida_titulo"><h1>Escolha uma partida pra começar</h1></p>
+                <div class="partida_container">
+                    <p id = "lista-partidas"></p>
+                    <ul>
+                        <li><button onclick="iniciarPartida('partida1')" id="primeira">Primeira partida</button></li>
+                        <li><button onclick="iniciarPartida('partida2')" id="segunda">Segunda partida</button></li>
+                    </ul>
 
                 </div>
+
+                
+
     
                <!--<img src="teste-imagem.jpg" alt="parede de tijolos com um alien gamer" class="container_imagem-alien">
 --> 
