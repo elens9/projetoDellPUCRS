@@ -36,20 +36,14 @@ function cadastrar(){
 
     console.log(times);
     let resultado = document.getElementById("lista-times");
+    
+    resultado.innerHTML = ``;
+    
     times.push(time);
-
     //FAZER UM FOR
-    let mensagem;
-    if(mensagem != ""){
-        mensagem = `Times cadastrados: ${time.nomeTime},`;
-        resultado.innerHTML = mensagem;
-
-    }
-    
-    
-       
-    
-    
+    for(i = 0; i < times.length; i++){
+            resultado.innerHTML += `<label class="texto_label">Time cadastrado: ${times[i].nomeTime}</label><br>`;
+        }
 
     //limmpando os campos
     document.getElementById("nome-time").value = "";
@@ -97,7 +91,7 @@ function sortearTimes(times){
 
      for(let i = 0; i < times.length; i+=2){
         if(times.lenght == 0){
-            partidaHtml = `Partida ${Math.floor(i/2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
+            partidaHtml = `Partida ${Math.floor(i/2)}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
         }else {
             partidaHtml = `Partida ${Math.floor(i/2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
 
@@ -120,7 +114,9 @@ function sortearTimes(times){
 
 function iniciarPartida(){
     partidaAtual = 0;
-    atualizarPlacar();
+    
+
+
     let partidaSelecionada = document.getElementById("select_partida");
     partidaSelecionada.innerHTML =  `<option value="">Selecione um partida</option>`;
                     
@@ -129,15 +125,15 @@ function iniciarPartida(){
 
     if(partidaSelecionada){
 
-        for(i = 0; i < partidas.length; i++){
+        for(i = 0; i < partidas.length; i+=1){
             let selecao = document.createElement("option");
             selecao.value = i;
-            selecao.textContent = `Partida ${i +1}`;
-            partidaSelecionada.appendChild(selecao);
-            
+            selecao.textContent += `Partida ${i +1}`;
+            partidaSelecionada.appendChild(selecao); 
         }
-       
     }
+
+    atualizarPlacar();
   
   
     
@@ -174,6 +170,8 @@ function iniciarPartida(){
 }
 
 function encerrarPartida(){
+    document.getElementById("pontuacao").innerHTML = "";//limpando campo
+
 
     let placarFinal = document.getElementById("placar-final");
     let [time1, time2] = times;
@@ -200,21 +198,31 @@ function encerrarPartida(){
 
 function atualizarPlacar(){
     totalPontos = document.getElementById("pontuacao");
+    let htmlMostrar = "";
+   
     
     if(totalPontos){
-        let htmlMostrar = "";
+      
         for(let i = 0; i < times.length; i+=2){
-            if(i + 1 < times.length){
-                htmlMostrar +=  `<div>
-                Pontuação inicial do time ${times[i].nomeTime} = ${times[i].pontuacao} pontos <br>
-                Pontuação inicial do time ${times[i + 1].nomeTime} = ${times[i + 1].pontuacao} pontos <br>
-                </div>`;
+            if(i %2 == 0){
+                if(i == 0){
+                    htmlMostrar +=  `<div>
+                    Pontuação inicial do time ${times[i].nomeTime} = ${times[i].pontuacao} pontos <br>
+                    </div>`;
+                } else {
+                    htmlMostrar += `<div >Pontuação inicial do time ${times[i - 1].nomeTime} = ${times[i - 1].pontuacao} pontos <br>
+                    </div>`;
+                }
+
             }
+            
         }
         totalPontos.innerHTML = htmlMostrar;
         }
        
         partidas.push(totalPontos);
+
+      
 }
 
 
