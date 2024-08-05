@@ -1,5 +1,6 @@
 let times = [];
 let partidas = [];
+let partidaAtual;
 
 function cadastrar(){
     //buscando os valores inseridos pelo usuário
@@ -37,17 +38,25 @@ function cadastrar(){
     let resultado = document.getElementById("lista-times");
     times.push(time);
 
-    if(resultado.textContent == " "){
-        resultado.textContent = time.nomeTime;
-    } else{
-        resultado.textContent += ", " + time.nomeTime;
+    //FAZER UM FOR
+    let mensagem;
+    if(mensagem != ""){
+        mensagem = `Times cadastrados: ${time.nomeTime},`;
+        resultado.innerHTML = mensagem;
+
     }
+    
+    
+       
+    
+    
 
     //limmpando os campos
     document.getElementById("nome-time").value = "";
     document.getElementById("grito-guerra").value = "";
     document.getElementById("ano-fundacao").value = "";
 }
+
 
 
 function iniciarCampeonato(){
@@ -63,6 +72,7 @@ function iniciarCampeonato(){
 }
 
 
+
 function aleatorizarTimes(lista){
     //usando math floor e random pra gerar um indice aleatorio do array e selecionar os times
     for(let i = lista.length; i; i--){
@@ -73,49 +83,63 @@ function aleatorizarTimes(lista){
     }
 }
 
+
+
 function sortearTimes(times){
     partidas = []; //limpando as partidas anteriores
     let timesSorteados = document.getElementById("lista-sorteio");
-    let partidaSelecionada = document.getElementById("lista-partidas");
     let partidaDetalhes = "";
+
 
     //limpando
     timesSorteados.innerHTML = "";
-    partidaSelecionada = "";
+    let partidaHtml = "";
 
-   
-     //loop que vai garantir que os times sorteados nao se repitam
      for(let i = 0; i < times.length; i+=2){
-            //sorteando o time do próximo indice + 1 pra não repetir pares
-            partidaDetalhes += `Partida ${(i /2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
+        if(times.lenght == 0){
+            partidaHtml = `Partida ${Math.floor(i/2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
+        }else {
+            partidaHtml = `Partida ${Math.floor(i/2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
+
+        }
 
 
-            partidas.push(`Partida ${(i /2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`);
-   
+            timesSorteados.innerHTML += partidaHtml;
+
+
+            //adicionando os times no array partidas
+            partidas.push({
+                time1 : times[i],
+                time2 : times[i + 1]
+            });
+            
     }
-     //mostrando os adversários de cada partida
-     timesSorteados.innerHTML = partidaDetalhes;
 }
-
-
 
 
 
 function iniciarPartida(){
+    partidaAtual = 0;
+    atualizarPlacar();
     let partidaSelecionada = document.getElementById("select_partida");
+    partidaSelecionada.innerHTML =  `<option value="">Selecione um partida</option>`;
+                    
     let mostrarPartida = document.getElementById("mostrar-partida");
-    let partidaIndice = partidaSelecionada.value;
 
 
-    //mostrando os adversários da partida selecionada
-        mostrarPartida.innerHTML = partidas[partidaIndice] || "Selecione uma partida.";
+    if(partidaSelecionada){
 
-}
-    
-    comecarPartida = document.getElementById("iniciar-partida");
-    //começando a partida com o resumo dos pontos iniciais
-    let resumoPlacar= atualizarPlacar();
-   // comecarPartida.innerHTML = resumoPlacar;
+        for(i = 0; i < partidas.length; i++){
+            let selecao = document.createElement("option");
+            selecao.value = i;
+            selecao.textContent = `Partida ${i +1}`;
+            partidaSelecionada.appendChild(selecao);
+            
+        }
+       
+    }
+  
+  
     
     //ao clicar no botão de blot ou plif o placar já é atualizado
     document.getElementById("btn-blot1").addEventListener("click", function () {
@@ -147,8 +171,7 @@ function iniciarPartida(){
       
     })
 
-   
-
+}
 
 function encerrarPartida(){
 
@@ -175,28 +198,26 @@ function encerrarPartida(){
 
    
 
-
 function atualizarPlacar(){
     totalPontos = document.getElementById("pontuacao");
     
     if(totalPontos){
         let htmlMostrar = "";
-
         for(let i = 0; i < times.length; i+=2){
-            let equipe = times[i];
-            htmlMostrar +=  `Pontuação inicial do time ${equipe.nomeTime} = ${equipe.pontuacao} pontos <br>`;
-            //totalPontos.innerHTML = htmlMostrar;
-            
+            if(i + 1 < times.length){
+                htmlMostrar +=  `<div>
+                Pontuação inicial do time ${times[i].nomeTime} = ${times[i].pontuacao} pontos <br>
+                Pontuação inicial do time ${times[i + 1].nomeTime} = ${times[i + 1].pontuacao} pontos <br>
+                </div>`;
+            }
         }
         totalPontos.innerHTML = htmlMostrar;
+        }
+       
         partidas.push(totalPontos);
-        
-    }else {
-        console.log("elemento não encontrado.")
-    }
-
-
 }
+
+
 
 function avisarAdvrungh(i){
     let advrungh = 10;
@@ -204,9 +225,9 @@ function avisarAdvrungh(i){
         times[i].pontuacao -= advrungh;
         atualizarPlacar();
     }
-   
-
 }
+
+
 
 function fazerBlot(i){
     let blot = 5;
@@ -216,15 +237,17 @@ function fazerBlot(i){
     } 
 }
 
+
+
 function fazerPlif(i){
     let plif = 1;
     if(i >= 0 && i < times.length){
         times[i].pontuacao -= plif;
         atualizarPlacar();
-
     } 
-
 }
+
+
 
 function limparPartida(){
     document.getElementById("placar-final").innerHTML = "";
@@ -232,9 +255,6 @@ function limparPartida(){
     document.getElementById("iniciar-partida").innerHTML = "";
     document.getElementById("mostrar-partida").innerHTML = "";
     document.getElementById("iniciar-partida").innerHTML ="";
- 
-    
-
 }
 
 
