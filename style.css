@@ -8,7 +8,6 @@ background-color: black;
 
 
 .container_texto{
-    text-align: justify;
     color: blue;
     font-size: 20px;
     max-width: 80%;
@@ -78,3 +77,6 @@ h1{
     color: blue;
 }
 
+#lista-sorteio{
+    color: aqua;
+}

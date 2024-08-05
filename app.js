@@ -1,6 +1,7 @@
 let times = [];
 let partidas = [];
 let partidaAtual;
+let vencedores = [];
 
 function cadastrar() {
     //buscando os valores inseridos pelo usuário
@@ -55,7 +56,7 @@ function cadastrar() {
 
 function iniciarCampeonato() {
     //permitindo o início da partida só com 8 ou mais times em números pares
-    if (times.length % 2 !== 0 || times.length < 8) {
+    if (times.length % 2 !== 0 || times.length < 4) {
         alert("O número de times deve ser maior que 8 e par.");
         return;
     }
@@ -91,23 +92,16 @@ function sortearTimes(times) {
 
     for (let i = 0; i < times.length; i += 2) {
         if (times.lenght == 0) {
-            partidaHtml = `Partida ${Math.floor(i / 2)}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
+            partidaHtml = `Partida ${Math.floor(i / 2)+1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
         } else {
             partidaHtml = `Partida ${Math.floor(i / 2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
 
         }
-
-
-        timesSorteados.innerHTML += partidaHtml;
-
-
-        //adicionando os times no array partidas
-        partidas.push({
-            time1: times[i],
-            time2: times[i + 1]
-        });
-
     }
+        timesSorteados.innerHTML += partidaHtml;
+        //adicionando os times no array partidas
+        partidas.push(partidaHtml);
+        
 }
 
 
@@ -120,15 +114,14 @@ function iniciarPartida() {
     let partidaSelecionada = document.getElementById("select_partida");
     partidaSelecionada.innerHTML = `<option value="">Selecione um partida</option>`;
 
-    let mostrarPartida = document.getElementById("mostrar-partida");
 
 
     if (partidaSelecionada) {
 
-        for (i = 0; i < partidas.length; i += 1) {
+        for (i = 0; i < partidas.length; i += 2) {
             let selecao = document.createElement("option");
             selecao.value = i;
-            selecao.textContent += `Partida ${i + 1}`;
+            selecao.textContent += `Partida ${i+1}`;
             partidaSelecionada.appendChild(selecao);
         }
     }
@@ -186,12 +179,22 @@ function encerrarPartida() {
         let vencedor = time1.pontuacao > time2.pontuacao ? time1 : time2;
         let perdedor = time1.pontuacao > time2.pontuacao ? time2 : time1;
 
-        placarFinal.innerHTML = `Time ${vencedor.nomeTime} é o vencedor. <br>
+        placarFinal.innerHTML = `Time ${vencedor.nomeTime} é o vencedor. Passa pra próxima fase. <br>
                                 Time ${vencedor.nomeTime} = ${vencedor.pontuacao} pts <br>
                                 Time ${perdedor.nomeTime} = ${perdedor.pontuacao} pts`;
-
+        vencedores.push(vencedor);
+        console.log(vencedores);
     }
 
+}
+
+function proximaFase(){
+    aleatorizarTimes(vencedores);
+    sortearTimes(vencedores);
+
+    atualizarPlacar();
+
+    
 }
 
 
