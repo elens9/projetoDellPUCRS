@@ -64,6 +64,10 @@ function iniciarCampeonato() {
     //sorteando os times
     aleatorizarTimes(times);
     sortearTimes(times);
+
+
+
+    //console.log(`Campeonato iniciado com os times ${times[i].textContent}`);
 }
 
 
@@ -82,54 +86,60 @@ function aleatorizarTimes(lista) {
 
 function sortearTimes(times) {
     partidas = []; //limpando as partidas anteriores
-    let timesSorteados = document.getElementById("lista-sorteio");
-    let partidaDetalhes = "";
+    let timesSorteados = document.getElementById("mostrar-partida");
+    console.log(times);
 
 
     //limpando
     timesSorteados.innerHTML = "";
     let partidaHtml = "";
 
-    for (let i = 0; i < times.length; i += 2) {
+    for (let i = 0; i < times.lenght; i +=2) {
         if (times.lenght == 0) {
-            partidaHtml = `Partida ${Math.floor(i / 2)+1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
+            partidaHtml += `Partida ${Math.floor(i / 2) +1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
         } else {
-            partidaHtml = `Partida ${Math.floor(i / 2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
+            partidaHtml += `Partida ${Math.floor(i / 2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
 
         }
+       
     }
-        timesSorteados.innerHTML += partidaHtml;
+       
+    timesSorteados.innerHTML += partidaHtml;
         //adicionando os times no array partidas
         partidas.push(partidaHtml);
+        console.log(partidaHtml);
+       
+     
         
 }
 
-
-
-function iniciarPartida() {
-    partidaAtual = 0;
-
-
-
+function selecionarPartida(){
     let partidaSelecionada = document.getElementById("select_partida");
     partidaSelecionada.innerHTML = `<option value="">Selecione um partida</option>`;
 
 
 
-    if (partidaSelecionada) {
 
-        for (i = 0; i < partidas.length; i += 2) {
+
+        for (i = 0; i < partidas.length; i ++) {
             let selecao = document.createElement("option");
             selecao.value = i;
-            selecao.textContent += `Partida ${i+1}`;
+            selecao.textContent += `Partida ${i+1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime}`;
             partidaSelecionada.appendChild(selecao);
         }
     }
 
+
+
+
+function iniciarPartida() {
+    partidaAtual = 0;
+    selecionarPartida();
     atualizarPlacar();
+   
 
 
-
+    
     //ao clicar no botão de blot ou plif o placar já é atualizado
     document.getElementById("btn-blot1").addEventListener("click", function () {
         fazerBlot(0);
@@ -159,6 +169,8 @@ function iniciarPartida() {
         avisarAdvrungh(1);
 
     })
+
+    
 
 }
 
