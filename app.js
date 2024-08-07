@@ -73,6 +73,7 @@ function iniciarCampeonato() {
 
 
 function aleatorizarTimes(lista) {
+  
     //usando math floor e random pra gerar um indice aleatorio do array e selecionar os times
     for (let i = lista.length; i; i--) {
         let indiceAleatorio = Math.floor(Math.random() * i);
@@ -85,29 +86,32 @@ function aleatorizarTimes(lista) {
 
 
 function sortearTimes(times) {
+    console.log(partidas)
     partidas = []; //limpando as partidas anteriores
-    let timesSorteados = document.getElementById("mostrar-partida");
-    console.log(times);
-
-
+    let timesSorteados = document.getElementById("lista-sorteio");
+    
     //limpando
     timesSorteados.innerHTML = "";
     let partidaHtml = "";
 
-    for (let i = 0; i < times.lenght; i +=2) {
-        if (times.lenght == 0) {
-            partidaHtml += `Partida ${Math.floor(i / 2) +1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
+    for (let i = 0; i < times.length; i +=2) {
+        if (times.length == 0) {
+            partidaHtml += `Partida ${Math.floor(i / 2)}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
+          
+
         } else {
             partidaHtml += `Partida ${Math.floor(i / 2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
 
         }
-       
+        
     }
-       
     timesSorteados.innerHTML += partidaHtml;
+       
         //adicionando os times no array partidas
         partidas.push(partidaHtml);
         console.log(partidaHtml);
+        console.log(times);
+       
        
      
         
@@ -118,13 +122,17 @@ function selecionarPartida(){
     partidaSelecionada.innerHTML = `<option value="">Selecione um partida</option>`;
 
 
-
-
-
-        for (i = 0; i < partidas.length; i ++) {
+        for (i = 0; i < partidas.length; i +=2) {
             let selecao = document.createElement("option");
             selecao.value = i;
-            selecao.textContent += `Partida ${i+1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime}`;
+            if(partidas.length == 0){
+                selecao.textContent += `Partida ${Math.floor(i/2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime}`;
+            } else {
+                selecao.textContent += `Partida ${Math.floor(i/2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime}`;
+
+
+            }
+            
             partidaSelecionada.appendChild(selecao);
         }
     }
@@ -133,10 +141,11 @@ function selecionarPartida(){
 
 
 function iniciarPartida() {
-    partidaAtual = 0;
-    selecionarPartida();
-    atualizarPlacar();
+    partidaAtual += selecionarPartida();
+ 
    
+   
+    atualizarPlacar();
 
 
     
@@ -170,7 +179,6 @@ function iniciarPartida() {
 
     })
 
-    
 
 }
 
@@ -213,16 +221,17 @@ function proximaFase(){
 
 function atualizarPlacar() {
     totalPontos = document.getElementById("pontuacao");
+    document.getElementById("pontuacao").innerHTML = "";
     let htmlMostrar = "";
 
 
     if (totalPontos) {
 
-        for (let i = 0; i < times.length; i += 2) {
+        for (let i = 0; i < times.length; i +=2) {
 
-            if (i == 0) {
+            if (times.length == 0) {
                 htmlMostrar += `<div>
-                    Pontuação inicial do time ${times[i].nomeTime} = ${times[i].pontuacao} pontos <br>
+                    Pontuação inicial do time ${times[Math.floor(i/2) +1].nomeTime} = ${times[Math.floor(i/2) + 1].pontuacao} pontos <br>
                     </div>`;
             } else {
                 htmlMostrar += `<div >Pontuação inicial do time ${times[i - 1].nomeTime} = ${times[i - 1].pontuacao} pontos <br>
