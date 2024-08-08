@@ -124,9 +124,9 @@ function selecionarPartida(){
 
         for (i = 0; i < partidas.length; i +=2) {
             let selecao = document.createElement("option");
-            selecao.value = i;
+            selecao.value += i;
             if(partidas.length == 0){
-                selecao.textContent += `Partida ${Math.floor(i/2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime}`;
+                selecao.textContent += `Partida ${i + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime}`;
             } else {
                 selecao.textContent += `Partida ${Math.floor(i/2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime}`;
 
@@ -141,9 +141,9 @@ function selecionarPartida(){
 
 
 function iniciarPartida() {
-    partidaAtual += selecionarPartida();
+    selecionarPartida();
+    limparPartida();
  
-   
    
     atualizarPlacar();
 
@@ -228,15 +228,11 @@ function atualizarPlacar() {
     if (totalPontos) {
 
         for (let i = 0; i < times.length; i +=2) {
-
-            if (times.length == 0) {
+ 
                 htmlMostrar += `<div>
                     Pontuação inicial do time ${times[Math.floor(i/2) +1].nomeTime} = ${times[Math.floor(i/2) + 1].pontuacao} pontos <br>
                     </div>`;
-            } else {
-                htmlMostrar += `<div >Pontuação inicial do time ${times[i - 1].nomeTime} = ${times[i - 1].pontuacao} pontos <br>
-                    </div>`;
-            }
+        
 
         }
 
