@@ -58,7 +58,7 @@ function cadastrar() {
 
 function iniciarCampeonato() {
     //permitindo o início da partida só com 8 ou mais times em números pares
-    if (times.length % 2 !== 0 || times.length < 4 || times.length > 16) {
+    if (times.length % 2 !== 0 || times.length < 8 || times.length > 16) {
         alert("O número de times deve ser par entre 8 e 16.");
         return;
     }
@@ -94,13 +94,13 @@ function sortearTimes(times) {
     //listando as partidas
     for (let i = 0; i < times.length; i += 2) {
         partidaHtml += `Partida ${Math.floor(i / 2) + 1}: ${times[i].nomeTime} vs ${times[i + 1].nomeTime} <br>`;
-        partidas.push({time1: times[i], time2: times[i + 1]});//adicionando os times no array partidas
+        partidas.push({ time1: times[i], time2: times[i + 1] });//adicionando os times no array partidas
 
-        }
+    }
 
     timesSorteados.innerHTML += partidaHtml;
 
-    
+
 
 }
 
@@ -112,18 +112,18 @@ function selecionarPartida() {
 
 
     //adicionando a seleção de partidas ao html
-    for (i = 0; i < partidas.length; i ++) {
+    for (i = 0; i < partidas.length; i++) {
         let selecao = document.createElement("option");
         selecao.value += i;
-    
+
         selecao.textContent += `Partida ${i + 1}: ${partidas[i].time1.nomeTime} vs ${partidas[i].time2.nomeTime}`;
 
         partidaSelecionada.appendChild(selecao);
     }
 
-    partidaSelecionada.addEventListener("change", function(){
+    partidaSelecionada.addEventListener("change", function () {
         partidaSelecionadaIndice = parseInt(partidaSelecionada.value);
-        partidaAtual = partidas[partidaSelecionadaIndice]; 
+        partidaAtual = partidas[partidaSelecionadaIndice];
         time1 = partidaAtual.time1;
         time2 = partidaAtual.time2;
         atualizarPlacar();
@@ -135,7 +135,7 @@ function selecionarPartida() {
 
 function iniciarPartida() {
     selecionarPartida();
-    
+
 
     //ao clicar no botão de blot ou plif o placar já é atualizado
     document.getElementById("btn-blot1").addEventListener("click", function () {
@@ -171,11 +171,11 @@ function iniciarPartida() {
 }
 
 function encerrarPartida() {
-    let partida = partidas[partidaSelecionadaIndice]; 
-   
+    let partida = partidas[partidaSelecionadaIndice];
+
     document.getElementById("pontuacao").innerHTML = "";//limpando campo
     let placarFinal = document.getElementById("placar-final");
-    
+
     atualizarPlacar();
 
     if (time1.pontuacao == time2.pontuacao) {
@@ -206,14 +206,14 @@ function atualizarPlacar() {
 
 
     if (time1 && time2) {
-            htmlMostrar += `<div>
+        htmlMostrar += `<div>
                     Pontuação inicial do time ${time1.nomeTime} = ${time1.pontuacao} pontos <br>
                     Pontuação inicial do time ${time2.nomeTime} = ${time2.pontuacao} pontos <br>
                     </div>`;
-        }
+    }
 
-        
-    
+
+
     totalPontos.innerHTML = htmlMostrar;
 
     partidas.push(totalPontos);
@@ -237,10 +237,10 @@ function avisarAdvrungh(i) {
     let advrungh = 10;
     if (i == 0) {
         time1.pontuacao -= advrungh;
-    } else if (i == 1){
+    } else if (i == 1) {
         time2.pontuacao -= advrungh;
     }
-       
+
     atualizarPlacar();
 }
 
@@ -250,7 +250,7 @@ function fazerBlot(i) {
     let blot = 5;
     if (i == 0) {
         time1.pontuacao += blot;
-    } else if (i == 1){
+    } else if (i == 1) {
         time2.pontuacao += blot;
     }
     atualizarPlacar();
@@ -263,7 +263,7 @@ function fazerPlif(i) {
     let plif = 1;
     if (i == 0) {
         time1.pontuacao -= plif;
-    } else if (i == 1){
+    } else if (i == 1) {
         time2.pontuacao -= plif;
     }
     atualizarPlacar();

@@ -12,106 +12,106 @@
         <div class="container_conteudo">
             <div class="container_cadastro">
                 <div class="container_texto">
-                <h1>Cadastro de<span class="container_texto_azul"> times</span></h1>
-                <p>O Ballit ChampionShip precisa de no mínimo 8 times pra poder começar a partida! Adicione os seus
-                    times!</p>
-                <br>
-
-                <div class="container_campo">
+                    <h1>Cadastro de<span class="container_texto_azul"> times</span></h1>
+                    <p>O Ballit ChampionShip precisa de no mínimo 8 times pra poder começar a partida! Adicione os seus
+                        times!</p>
                     <br>
-                    <label class="texto_label">Nome do time: </label>
-                    <input class="container_input" id="nome-time" type="text" placeholder="Nome do time">
-                </div>
 
-                <div class="container_campo">
-                    <label class="texto_label">Grito de guerra: </label>
-                    <input class="container_input" id="grito-guerra" type="text" placeholder="Grito de guerra">
-                </div>
+                    <div class="container_campo">
+                        <br>
+                        <label class="texto_label">Nome do time: </label>
+                        <input class="container_input" id="nome-time" type="text" placeholder="Nome do time">
+                    </div>
 
-                <div class="container_campo">
-                    <label class="texto_label">Ano de fundação: </label>
-                    <input class="container_input" id="ano-fundacao" type="number" min="1"
-                        placeholder="Ano de fundação">
-                </div>
-                <br>
-                <p></p>
-            </div>
-                <button onclick="cadastrar()" id="btn-cadastrar" class="container_botao">Cadastrar time</button><br>
+                    <div class="container_campo">
+                        <label class="texto_label">Grito de guerra: </label>
+                        <input class="container_input" id="grito-guerra" type="text" placeholder="Grito de guerra">
+                    </div>
 
-            
-
-            <div class="container_campeonato">
-                <div class="campeonato">
-                    <div class="container_texto">
-                        <h2>Times participantes</h2>
-
-                        <div id="lista-times">
-                            <label class="texto_label">
-                                Times cadastrados: nenhum até agora
-                            </label>
-                        </div>
+                    <div class="container_campo">
+                        <label class="texto_label">Ano de fundação: </label>
+                        <input class="container_input" id="ano-fundacao" type="number" min="1"
+                            placeholder="Ano de fundação">
                     </div>
                     <br>
-                    <button onclick="iniciarCampeonato()" id="btn-campeonato" class="container_botao">Começar
-                        Campeonato</button><br>
+                    <p></p>
+                </div>
+                <button onclick="cadastrar()" id="btn-cadastrar" class="container_botao">Cadastrar time</button><br>
+
+
+
+                <div class="container_campeonato">
+                    <div class="campeonato">
+                        <div class="container_texto">
+                            <h2>Times participantes</h2>
+
+                            <div id="lista-times">
+                                <label class="texto_label">
+                                    Times cadastrados: nenhum até agora
+                                </label>
+                            </div>
+                        </div>
+                        <br>
+                        <button onclick="iniciarCampeonato()" id="btn-campeonato" class="container_botao">Começar
+                            Campeonato</button><br>
+                    </div>
                 </div>
             </div>
-        </div>
 
-                <div class="container_partidas">
+            <div class="container_partidas">
                 <div class="partida_container">
-                
-                        <h1>Partida atual</h1>
 
-                        <div class="sorteio_container">
-                            <p id="lista-sorteio"></p>
-                        </div>
+                    <h1>Partida atual</h1>
 
-                        <div id="lista-partidas">
+                    <div class="sorteio_container">
+                        <p id="lista-sorteio"></p>
+                    </div>
+
+                    <div id="lista-partidas">
                         <label class="select_partida">Escolha uma partida pra começar:</label>
                         <select id="select_partida">
                             <option value="">Selecione um partida</option>
                         </select>
-                        </div>
+                    </div>
 
-                        <div class="mostrar_container">
-                            <p id="mostrar-partida"></p>
-                        </div>
-                        <br>
-                        <button onclick="iniciarPartida()" id="btn-iniciar-partida" class="container_botao">Iniciar a
-                            partida</button><br>
-                        <p id="iniciar-partida"></p>
-                        <button onclick="fazerBlot('time1')" id="btn-blot1" class="container_botao">Registrar Blot no 1°
-                            time</button>
-                        <button onclick="fazerPlif('time1')" id="btn-plif1" class="container_botao">Registrar Plif no 1°
-                            time</button><br>
-                        <p></p>
-                        <button onclick="fazerBlot('time2')" id="btn-blot2" class="container_botao">Registrar Blot no 2°
-                            time</button>
-                        <button onclick="fazerPlif('time2')" id="btn-plif2" class="container_botao">Registrar Plif no 2°
-                            time</button><br>
-                        <p></p>
-                        <button onclick="avisarAdvrungh('time1')" id="btn-falta1" class="container_botao">Advrungh do 1°
-                            time</button>
-                        <button onclick="avisarAdvrungh('time2')" id="btn-falta2" class="container_botao">Advrungh do 2°
-                            time</button><br>
-                        <p></p>
-                        <button onclick="encerrarPartida()" id="btn-encerrar" class="container_botao">Encerrar
-                            partida</button>
-                        <button onclick="limparPartida()" id="btn-limpar" class="container_botao">Começar outra
-                            partida</button>
+                    <div class="mostrar_container">
+                        <p id="mostrar-partida"></p>
+                    </div>
+                    <br>
+                    <button onclick="iniciarPartida()" id="btn-iniciar-partida" class="container_botao">Iniciar a
+                        partida</button><br>
+                    <p id="iniciar-partida"></p>
+                    <button onclick="fazerBlot('time1')" id="btn-blot1" class="container_botao">Registrar Blot no 1°
+                        time</button>
+                    <button onclick="fazerPlif('time1')" id="btn-plif1" class="container_botao">Registrar Plif no 1°
+                        time</button><br>
+                    <p></p>
+                    <button onclick="fazerBlot('time2')" id="btn-blot2" class="container_botao">Registrar Blot no 2°
+                        time</button>
+                    <button onclick="fazerPlif('time2')" id="btn-plif2" class="container_botao">Registrar Plif no 2°
+                        time</button><br>
+                    <p></p>
+                    <button onclick="avisarAdvrungh('time1')" id="btn-falta1" class="container_botao">Advrungh do 1°
+                        time</button>
+                    <button onclick="avisarAdvrungh('time2')" id="btn-falta2" class="container_botao">Advrungh do 2°
+                        time</button><br>
+                    <p></p>
+                    <button onclick="encerrarPartida()" id="btn-encerrar" class="container_botao">Encerrar
+                        partida</button>
+                    <button onclick="limparPartida()" id="btn-limpar" class="container_botao">Começar outra
+                        partida</button>
 
 
-                        <p id="pontuacao"></p>
-                        <p id="placar-final"></p>
-                
+                    <p id="pontuacao"></p>
+                    <p id="placar-final"></p>
+
                 </div>
-                </div>
-           
+            </div>
+
 
         </div>
     </div>
-    
+
     <script src="app.js" defer></script>
 
 </body>
